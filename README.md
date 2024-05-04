@@ -1,5 +1,5 @@
 # AR_Tracking_App
- 
+
  <!-- @format -->
 
 ## Package need to install
@@ -15,21 +15,24 @@
 ## Script for DB First Migration
 
 ```bash
--Scaffold-DbContext "Server=DESKTOP-92T9PSH;Database=AR_Tracker;User Id=sa;Password=p@ssw0rd;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ScaffoldContextModel -f
+-Scaffold-DbContext "Server=ISPL-DB1;Database=HRIS;User Id=sa;Password=enola845&*;TrustServerCertificate=True;"Microsoft.EntityFrameworkCore.SqlServer -OutputDir ScaffoldContextModel -f
 ```
 
-## Script for DB First Migration for selected Table
+## Script for DB First Migration for selected Table PM AND VISUAL STUDIO CODE
 
 ```bash
--Scaffold-DbContext "Server=DESKTOP-92T9PSH;Database=AR_Tracker;User Id=sa;Password=p@ssw0rd;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ScaffoldContextModel -f
--table table1 , table2
+-Scaffold-DbContext "Server=ISPL-DB1;Database=HRIS;User Id=sa;Password=enola845&*;TrustServerCertificate=True;"Microsoft.EntityFrameworkCore.SqlServer -OutputDir ScaffoldContextModel -f
+-table tbl_Cert
+
+
+dotnet ef dbcontext scaffold "Server=ISPL-DB1;Database=HRIS;User Id=sa;Password=enola845&*;TrustServerCertificate=True;"Microsoft.EntityFrameworkCore.SqlServer -t tbl_Cert -o ScaffoldContextModel -f
 ```
 
 ## Securing your Connection String
 
 - include this to appsettings.json
 
-  ### Code
+  ### Codedotnet
 
   ```bash
   "ConnectionStrings": {
@@ -76,12 +79,18 @@
 
 ```bash
  -add-migration <Message>
+
+
+ -dotnet ef migrations add <InitialMigrationName>
 ```
 
 ### Update Database
 
 ```bash
 -update-database
+
+
+-dotnet ef database update
 ```
 
 ### if you want to Roll Back
@@ -90,24 +99,31 @@
 -dotnet ef database update <PreviousMigrationName>
 ```
 
-
-
-
 # Dapper Installation
- - Install Dapper from Nuget
- - Install SQL Client from Nuget
 
- ## In Package Manager
- ``````bash
+- Install Dapper from Nuget
+- Install SQL Client from Nuget
 
- PM> Install-Package Dapper
+## In Package Manager
 
- ``````
+```bash
 
-  ``````bash
+PM> Install-Package Dapper
 
- PM> Install-Package Microsoft.Data.SqlClient
+```
 
- ``````
+```bash
+
+PM> Install-Package Microsoft.Data.SqlClient
+
+```
+
+# Adding sln
+
+```bash
+ dotnet new sln
 
 
+
+ dotnet new sln add ATEC_API.csproj
+```
