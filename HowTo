@@ -1,4 +1,4 @@
-// Sample HRISDTO object
+// Sample HRISDTO object POST METHOD
 var hrisDto = {
     empNo: "12345",
     customerId: "67890",
@@ -15,6 +15,41 @@ $.ajax({
         // Response received successfully
         console.log('Response:', response);
     },
+    error: function(xhr, textStatus, errorThrown) {
+        // Error occurred during the request
+        console.error('Error:', textStatus, errorThrown);
+        
+        // Check if the status code is 400 (Bad Request)
+        if (xhr.status === 400) {
+            // Parse the error response and extract the error message
+            var errorResponse = xhr.responseJSON;
+            if (errorResponse && errorResponse.errors) {
+                var errorMessage = "";
+                for (var key in errorResponse.errors) {
+                    if (errorResponse.errors.hasOwnProperty(key)) {
+                        errorMessage += errorResponse.errors[key].join(", ") + "\n";
+                    }
+                }
+                // Show the error message to the user
+                alert("One or more validation errors occurred:\n" + errorMessage);
+            }
+        }
+    }
+});
+
+//GET METHOD
+$.ajax({
+  url: 'https://localhost:7250/api/Staging/IsTrackOut',
+  type: 'GET',
+  headers: {
+    'accept': '*/*',
+    'paramLotCode': 'DUMM',
+    'paramStageCode': '231132'
+  },
+  success: function(response) {
+    // Handle success response here
+    console.log(response.details);
+  },
     error: function(xhr, textStatus, errorThrown) {
         // Error occurred during the request
         console.error('Error:', textStatus, errorThrown);
