@@ -14,6 +14,8 @@ builder.Services.AddSwaggerGen();
 
 //------------------Service Registration----------------
 builder.Services.AddScoped<IHRISRepository, HRISRepository>();
+builder.Services.AddScoped<IDapperConnection, DapperConnection>();
+builder.Services.AddScoped<IStagingRepository, StagingRepository>();
 //------------------------------------------------------
 
 

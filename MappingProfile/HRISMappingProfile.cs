@@ -1,4 +1,6 @@
-using ATEC_API.Data.DTO;
+
+
+using ATEC_API.Data.DTO.HRISDTO;
 using ATEC_API.DomainModels.HRISDomainModel;
 using AutoMapper;
 

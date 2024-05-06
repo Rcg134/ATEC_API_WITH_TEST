@@ -1,5 +1,4 @@
-using ATEC_API.Data.Context;
-using ATEC_API.Data.DTO;
+using ATEC_API.Data.DTO.HRISDTO;
 using ATEC_API.Data.IRepositories;
 using ATEC_API.GeneralModels;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +17,19 @@ namespace ATEC_API.Controllers
         }
 
         [HttpPost("IsEmployeeQualified")]
-        public async Task<IActionResult> IsEmployeeQualified([FromBody] HRISDTO hRISDTO)
+        public async Task<IActionResult> IsEmployeeQualified([FromHeader] string paramEmpNo,
+                                                             [FromHeader] string paramCustomerId,
+                                                             [FromHeader] int paramRecipeCode)
         {
-            var isQualified = await _hRISRepository.IsOperatorQualified(hRISDTO);
+            var hrisObject = new HRISDTO
+            {
+                EmpNo = paramEmpNo,
+                CustomerId = paramCustomerId,
+                RecipeCode = paramRecipeCode
+            };
+
+
+            var isQualified = await _hRISRepository.IsOperatorQualified(hrisObject);
 
             return Ok(new GeneralResponse
             {

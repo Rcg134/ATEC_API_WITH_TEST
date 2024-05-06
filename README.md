@@ -127,3 +127,12 @@ PM> Install-Package Microsoft.Data.SqlClient
 
  dotnet new sln add ATEC_API.csproj
 ```
+
+# Publish
+
+```bash
+
+ dotnet publish -o <path> --force
+
+
+```

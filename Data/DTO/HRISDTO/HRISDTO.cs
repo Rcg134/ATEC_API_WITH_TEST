@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ATEC_API.Data.DTO
+namespace ATEC_API.Data.DTO.HRISDTO
 {
     public class HRISDTO
     {
