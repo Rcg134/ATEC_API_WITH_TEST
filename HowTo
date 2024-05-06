@@ -37,14 +37,16 @@ $.ajax({
     }
 });
 
+
+
 //GET METHOD
 $.ajax({
   url: 'https://localhost:7250/api/Staging/IsTrackOut',
   type: 'GET',
   headers: {
     'accept': '*/*',
-    'paramLotCode': 'DUMM',
-    'paramStageCode': '231132'
+    'paramLotCode': 'DUMMYLOT.1-A',
+    'paramStageCode': '7'
   },
   success: function(response) {
     // Handle success response here
