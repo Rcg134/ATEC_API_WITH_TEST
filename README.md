@@ -136,3 +136,12 @@ PM> Install-Package Microsoft.Data.SqlClient
 
 
 ```
+
+# Creating Test
+
+```bash
+dotnet new xunit -n MyApiTests
+
+
+dotnet add reference <path>
+```

@@ -5,18 +5,24 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATEC_API", "ATEC_API.csproj", "{6C9ABA0F-74E4-4FD3-9BBE-1E4953D94C0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATEC_API_Test", "ATEC_API_Test\ATEC_API_Test.csproj", "{4BAB3988-8C3C-4F19-AC8A-1C217ADE485A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6C9ABA0F-74E4-4FD3-9BBE-1E4953D94C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C9ABA0F-74E4-4FD3-9BBE-1E4953D94C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C9ABA0F-74E4-4FD3-9BBE-1E4953D94C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C9ABA0F-74E4-4FD3-9BBE-1E4953D94C0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BAB3988-8C3C-4F19-AC8A-1C217ADE485A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BAB3988-8C3C-4F19-AC8A-1C217ADE485A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BAB3988-8C3C-4F19-AC8A-1C217ADE485A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BAB3988-8C3C-4F19-AC8A-1C217ADE485A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
