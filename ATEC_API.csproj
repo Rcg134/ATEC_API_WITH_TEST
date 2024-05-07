@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <!-- add this to remove error duplicate assembly -->
+  <PropertyGroup>
+      <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+      <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>    
+  </PropertyGroup>
 </Project>

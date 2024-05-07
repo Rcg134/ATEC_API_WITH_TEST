@@ -125,7 +125,7 @@ PM> Install-Package Microsoft.Data.SqlClient
 
 
 
- dotnet new sln add ATEC_API.csproj
+ dotnet sln add ATEC_API.csproj
 ```
 
 # Publish
@@ -144,4 +144,15 @@ dotnet new xunit -n MyApiTests
 
 
 dotnet add reference <path>
+```
+
+# ERROR IN ASSEMBLY add this on CSPROJ
+
+```bash
+
+  <PropertyGroup>
+      <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+      <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>
+
 ```
