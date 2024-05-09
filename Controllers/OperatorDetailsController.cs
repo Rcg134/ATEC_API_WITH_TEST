@@ -1,5 +1,6 @@
 using ATEC_API.Data.DTO.HRISDTO;
 using ATEC_API.Data.IRepositories;
+using ATEC_API.Filters;
 using ATEC_API.GeneralModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace ATEC_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ValidateModel]
     public class OperatorDetailsController : ControllerBase
     {
         private readonly IHRISRepository _hRISRepository;
@@ -16,7 +18,8 @@ namespace ATEC_API.Controllers
             _hRISRepository = hRISRepository;
         }
 
-        [HttpPost("IsEmployeeQualified")]
+        [HttpGet("IsEmployeeQualified")]
+
         public async Task<IActionResult> IsEmployeeQualified([FromHeader] string paramEmpNo,
                                                              [FromHeader] string paramCustomerId,
                                                              [FromHeader] int paramRecipeCode)

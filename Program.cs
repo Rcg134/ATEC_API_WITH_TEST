@@ -1,6 +1,7 @@
 using ATEC_API.Data.Context;
 using ATEC_API.Data.IRepositories;
 using ATEC_API.Data.Repositories;
+using ATEC_API.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 
+//------------------Service Registration----------------
+builder.Services.AddScoped<IHRISRepository, HRISRepository>();
+builder.Services.AddScoped<IDapperConnection, DapperConnection>();
+builder.Services.AddScoped<IStagingRepository, StagingRepository>();
+//------------------------------------------------------
+
+
+//------------------CORS Registration----------------
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -19,18 +28,17 @@ builder.Services.AddCors(options =>
                                 .AllowAnyHeader();
                       });
 });
+//------------------------------------------------------
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(ValidateModelAttribute));
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//------------------Service Registration----------------
-builder.Services.AddScoped<IHRISRepository, HRISRepository>();
-builder.Services.AddScoped<IDapperConnection, DapperConnection>();
-builder.Services.AddScoped<IStagingRepository, StagingRepository>();
-//------------------------------------------------------
 
 
 //----------------------Context Connection----------------------
