@@ -156,3 +156,11 @@ dotnet add reference <path>
   </PropertyGroup>
 
 ```
+
+# Auto Deploment just run the given file
+
+```bash
+
+powershell -File CICD.ps1
+
+```
