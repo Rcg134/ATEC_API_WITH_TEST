@@ -8,5 +8,8 @@ namespace ATEC_API.Data.StoredProcedures
     public class StagingSP
     {
         public static string usp_Staging_IsTrackOut = "usp_Staging_IsTrackOut";
+
+        //For test purposes
+        public static string usp_Staging_IsTrackOut_Test = "usp_Staging_IsTrackOut_Test";
     }
 }

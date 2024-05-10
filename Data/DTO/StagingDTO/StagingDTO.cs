@@ -9,8 +9,11 @@ namespace ATEC_API.Data.DTO.StagingDTO
     public class StagingDTO
     {
         [Required]
-        public int stationId { get; set; }
+        public int currentStationId { get; set; }
+        [Required]
+        public int nextStationId { get; set; }
         [Required]
         public string lotCode { get; set; }
+
     }
 }

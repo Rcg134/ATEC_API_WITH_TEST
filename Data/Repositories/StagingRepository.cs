@@ -17,26 +17,27 @@ namespace ATEC_API.Data.Repositories
         {
             _dapperConnection = dapperConnection;
         }
-        public async Task<Boolean> IsTrackOut(StagingDTO stagingDTO)
+        public async Task<StagingResponse> IsTrackOut(StagingDTO stagingDTO)
         {
             await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
 
             var IsTrackOut = await sqlConnection.QueryFirstOrDefaultAsync<StagingResponse>(
-                                                                   StagingSP.usp_Staging_IsTrackOut,
+                                                                   StagingSP.usp_Staging_IsTrackOut_Test,
                                                                    new
                                                                    {
-                                                                       StationId = stagingDTO.stationId,
+                                                                       CurrentStationId = stagingDTO.currentStationId,
+                                                                       NextStationId = stagingDTO.nextStationId,
                                                                        LotCode = stagingDTO.lotCode,
+
                                                                    },
                                                                    commandType: CommandType.StoredProcedure
                                                                    );
-
-            if (IsTrackOut.IsTrackout == true)
+            if (IsTrackOut == null)
             {
-                return true;
+                return null;
             }
 
-            return false;
+            return IsTrackOut;
         }
     }
 }
