@@ -24,7 +24,8 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("https://localhost:7041",
-                                             "http://192.168.5.9:400")
+                                             "http://192.168.5.9:400",
+                                             "http://prod.atecmes.com:400")
                                 .AllowAnyHeader();
                       });
 });
