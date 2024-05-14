@@ -13,15 +13,25 @@ namespace ATEC_API_Test
 
         public Mock<IStagingRepository> _stagingMock = new();
 
+        public static IEnumerable<object[]> TestData =>
+        new List<object[]>
+        {
+                new object[] { "Dummy-lot-A", true, true },
+                new object[] { "CRA", false, false },
+        };
 
-        [Fact]
-        public async Task Check_If_CurrentStage_Is_Already_TrackedOut()
+
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public async Task Check_If_CurrentStage_Is_Already_TrackedOut(string lotAlias,
+                                                                      bool HasSetUp,
+                                                                      bool IsTrackOut)
         {
 
             var expectedResponse = new StagingResponse
             {
-                HasSetUp = true,
-                IsTrackout = false
+                HasSetUp = HasSetUp,
+                IsTrackout = IsTrackOut
             };
 
             _stagingMock
@@ -30,15 +40,15 @@ namespace ATEC_API_Test
 
             var StagingController = new StagingController(_stagingMock.Object);
 
-            var response = await StagingController.IsLotTrackOut("Sample Lot");
+            var response = await StagingController.IsLotTrackOut(lotAlias);
 
             var okResult = Assert.IsType<OkObjectResult>(response);
             var generalResponse = Assert.IsType<GeneralResponse>(okResult.Value);
             var stagingResponse = Assert.IsType<StagingResponse>(generalResponse.Details);
 
 
-            Assert.True(stagingResponse.HasSetUp);
-            Assert.False(stagingResponse.IsTrackout);
+            Assert.Equal(HasSetUp, stagingResponse.HasSetUp);
+            Assert.Equal(IsTrackOut, stagingResponse.IsTrackout);
 
         }
     }
