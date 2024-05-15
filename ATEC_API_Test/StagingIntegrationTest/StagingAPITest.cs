@@ -16,18 +16,18 @@ namespace ATEC_API_Test.StagingIntegrationTest
 
 
         [Theory]
-        [InlineData("DUMMYLOT.1-A")]
-        public async Task IStagingRepository_IsTrackOut_MustNotReturnNull(string LotAlias)
+        [InlineData("DUMMYLOT.1-A", 200)]
+        [InlineData("", 400)]
+        public async Task IStagingRepository_IsTrackOut_MustReturn_StatusCode(string LotAlias,
+                                                                              int StatusCode)
         {
             var client = _factory.CreateDefaultClient();
             client.DefaultRequestHeaders.Add("paramLotAlias", LotAlias);
 
             var response = await client.GetAsync("/api/Staging/IsTrackOut");
-
-            Assert.Equal(200, (int)response.StatusCode);
-
-
+            Assert.Equal(StatusCode, (int)response.StatusCode);
         }
+
 
 
     }
