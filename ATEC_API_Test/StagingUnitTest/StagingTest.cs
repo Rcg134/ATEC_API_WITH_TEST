@@ -7,7 +7,7 @@ using ATEC_API.GeneralModels.MESATECModels.StagingResponse;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace ATEC_API_Test
+namespace ATEC_API_Test.StagingUnitTest
 {
     public class StagingTest
     {
@@ -49,7 +49,6 @@ namespace ATEC_API_Test
 
             Assert.Equal(HasSetUp, stagingResponse.HasSetUp);
             Assert.Equal(IsTrackOut, stagingResponse.IsTrackout);
-
 
             _stagingMock.Verify(repo => repo.IsTrackOut(It.IsAny<StagingDTO>()), Times.Once);
 

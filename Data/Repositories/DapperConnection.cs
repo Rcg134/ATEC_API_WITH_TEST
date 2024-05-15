@@ -7,6 +7,8 @@ namespace ATEC_API.Data.Repositories
     public class DapperConnection : IDapperConnection
     {
         private readonly IConfiguration _configuration;
+        private SqlConnection connection;
+
 
         public DapperConnection(IConfiguration configuration)
         {
