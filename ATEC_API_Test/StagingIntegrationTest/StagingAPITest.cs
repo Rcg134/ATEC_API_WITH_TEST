@@ -73,5 +73,29 @@ namespace ATEC_API_Test.StagingIntegrationTest
             Assert.Equal(expectedJson, actualJson);
         }
 
+
+
+        //Improve Integration testing using HTTP.JSON that all all for test method in one single method
+        //use case insensitive deserialization
+        //validate response has success status code
+        //validate content media type header
+        //Validate response includes header content
+        [Fact]
+        public async Task Getall_ReturnsExpectedRespomes()
+        {
+            var expectedJson = "{\"details\":{\"hasSetUp\":true,\"isTrackout\":true}}";
+            _client.DefaultRequestHeaders.Add("paramLotAlias", "DUMMYLOT.1-A");
+            var responseModel = await _client.GetFromJsonAsync<expectedIsTrackOutModel>("");
+
+            var actualJson = JsonSerializer.Serialize(responseModel);
+            Assert.NotNull(responseModel.details);
+            Assert.Equal(expectedJson, actualJson);
+        }
+
+
+
+
+
+
     }
 }
