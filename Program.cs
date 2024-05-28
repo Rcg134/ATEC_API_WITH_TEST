@@ -14,6 +14,7 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddScoped<IHRISRepository, HRISRepository>();
 builder.Services.AddScoped<IDapperConnection, DapperConnection>();
 builder.Services.AddScoped<IStagingRepository, StagingRepository>();
+builder.Services.AddScoped<ICantierRepository, CantierRepository>();
 //------------------------------------------------------
 
 
@@ -23,9 +24,12 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:7041",
-                                             "http://192.168.5.9:400",
-                                             "http://prod.atecmes.com:400")
+                          //policy.WithOrigins("https://localhost:7041",
+                          //                   "http://192.168.5.9:400",
+                          //                   "http://prod.atecmes.com:400",
+                          //                   "https://localhost:32536")
+                          //      .AllowAnyHeader();
+                          policy.AllowAnyOrigin()
                                 .AllowAnyHeader();
                       });
 });

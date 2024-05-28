@@ -18,15 +18,11 @@ namespace ATEC_API.Controllers
         }
 
         [HttpGet("IsTrackOut")]
-        public async Task<IActionResult> IsEmployeeQualified([FromHeader] string paramLotCode,
-                                                             [FromHeader] int paramCurrentStageCode,
-                                                             [FromHeader] int paramNextStageCode)
+        public async Task<IActionResult> IsEmployeeQualified([FromHeader] string paramLotAlias)
         {
             var staging = new StagingDTO
             {
-                lotCode = paramLotCode,
-                currentStationId = paramCurrentStageCode,
-                nextStationId = paramNextStageCode
+                LotAlias = paramLotAlias,
             };
 
             var isTrackOut = await _stagingRepository.IsTrackOut(staging);

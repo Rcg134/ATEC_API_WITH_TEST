@@ -25,9 +25,7 @@ namespace ATEC_API.Data.Repositories
                                                                    StagingSP.usp_Staging_IsTrackOut_Test,
                                                                    new
                                                                    {
-                                                                       CurrentStationId = stagingDTO.currentStationId,
-                                                                       NextStationId = stagingDTO.nextStationId,
-                                                                       LotCode = stagingDTO.lotCode,
+                                                                       LotAlias = stagingDTO.LotAlias,
 
                                                                    },
                                                                    commandType: CommandType.StoredProcedure
