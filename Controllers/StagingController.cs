@@ -22,7 +22,7 @@ namespace ATEC_API.Controllers
         {
             var staging = new StagingDTO
             {
-                lotCode = paramLotAlias,
+                LotAlias = paramLotAlias,
             };
 
             var isTrackOut = await _stagingRepository.IsTrackOut(staging);
