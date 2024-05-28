@@ -157,7 +157,7 @@ dotnet add reference <path>
 
 ```
 
-# Auto Deploment just run the given file
+# Auto Deployment just run the given file
 
 ```bash
 

@@ -25,8 +25,12 @@ namespace ATEC_API.Data.Repositories
                                                                    StagingSP.usp_Staging_IsTrackOut_Test,
                                                                    new
                                                                    {
+<<<<<<< HEAD
                                                                        LotAlias = stagingDTO.LotAlias,
 
+=======
+                                                                       LotAlias = stagingDTO.lotCode,
+>>>>>>> 8ac8438c0d17d168b5b8066d631490bf847f1168
                                                                    },
                                                                    commandType: CommandType.StoredProcedure
                                                                    );
