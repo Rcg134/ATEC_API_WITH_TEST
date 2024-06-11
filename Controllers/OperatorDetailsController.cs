@@ -8,7 +8,6 @@ namespace ATEC_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ValidateModel]
     public class OperatorDetailsController : ControllerBase
     {
         private readonly IHRISRepository _hRISRepository;

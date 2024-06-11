@@ -3,6 +3,7 @@ using ATEC_API.Data.IRepositories;
 using ATEC_API.Data.Repositories;
 using ATEC_API.Filters;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,21 @@ builder.Services.AddCors(options =>
                       });
 });
 //------------------------------------------------------
+
+
+//------------------Logger Configuration-----------------
+var logger = new LoggerConfiguration()
+                          .WriteTo.Console()
+                          .WriteTo.File("Logs/ATECAPI.txt", rollingInterval: RollingInterval.Day)
+                          .MinimumLevel
+                          .Information()
+                          .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+//-------------------------------------------------------
+
+
 
 
 builder.Services.AddControllers(options =>

@@ -164,3 +164,15 @@ dotnet add reference <path>
 powershell -File CICD.ps1
 
 ```
+
+# Serilog
+
+- It allows you to log messages to a console, a file, or a database.
+- Install the following Packages
+
+```bash
+Serilog
+Serilog.AspNetCore
+Serilog.Singks.Console
+Serilog.Sinks.File
+```

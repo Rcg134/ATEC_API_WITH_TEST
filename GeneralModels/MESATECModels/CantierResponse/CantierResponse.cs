@@ -7,7 +7,6 @@ namespace ATEC_API.GeneralModels.MESATECModels.CantierResponse
 {
     public class CantierResponse
     {
-   
         public string LotNumber { get; set; }
         public string ProductID { get; set; }
         public string Device { get; set; }

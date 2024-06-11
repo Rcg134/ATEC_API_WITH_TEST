@@ -13,6 +13,8 @@ namespace ATEC_API_Test.StagingUnitTest
 
         public Mock<IStagingRepository> _stagingMock = new();
 
+        
+
         public static IEnumerable<object[]> TestData =>
         new List<object[]>
         {
@@ -36,8 +38,10 @@ namespace ATEC_API_Test.StagingUnitTest
             _stagingMock
                   .Setup(repo => repo.IsTrackOut(It.IsAny<StagingDTO>()))
                   .ReturnsAsync(expectedResponse);
+                  
+             var mockLogger = new Mock<ILogger<StagingController>>();
 
-            var StagingController = new StagingController(_stagingMock.Object);
+            var StagingController = new StagingController(_stagingMock.Object , mockLogger.Object);
 
             var response = await StagingController.IsLotTrackOut(lotAlias);
 
