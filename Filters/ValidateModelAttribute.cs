@@ -17,8 +17,7 @@ namespace ATEC_API.Filters
         private readonly ILogger<StagingController> _logger;
         public ValidateModelAttribute(ILogger<StagingController> logger)
         {
-            _logger = logger;
-            
+            _logger = logger;     
         }
         public override void OnResultExecuting(ResultExecutingContext context)
         {

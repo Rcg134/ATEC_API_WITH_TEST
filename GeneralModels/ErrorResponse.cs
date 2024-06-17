@@ -9,6 +9,6 @@ namespace ATEC_API.GeneralModels
     {
         public string title { get; set; } = "One or more validation errors occurred.";
         public int status { get; set; }
-        public Dictionary<string, string[]> error { get; set; }
+        public Dictionary<string, string[]>? error { get; set; }
     }
 }

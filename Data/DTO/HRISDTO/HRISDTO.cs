@@ -10,9 +10,9 @@ namespace ATEC_API.Data.DTO.HRISDTO
     {
 
         [Required]
-        public string EmpNo { get; set; }
+        public string? EmpNo { get; set; }
         [Required]
-        public string CustomerId { get; set; }
+        public string? CustomerId { get; set; }
         [Required]
         public int RecipeCode { get; set; }
 

@@ -10,7 +10,7 @@ namespace ATEC_API.Data.DTO.StagingDTO
     {
         
         [Required]
-        public string LotAlias { get; set; }
+        public string? LotAlias { get; set; }
 
     }
 }

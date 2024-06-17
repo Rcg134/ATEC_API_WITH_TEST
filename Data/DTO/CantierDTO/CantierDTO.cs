@@ -9,6 +9,6 @@ namespace ATEC_API.Data.DTO.Cantier
     public class CantierDTO
     {
         [Required]
-        public string LotNumber { get; set; }
+        public string? LotNumber { get; set; }
     }
 }

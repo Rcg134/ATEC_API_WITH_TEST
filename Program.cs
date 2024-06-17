@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-
 //------------------Service Registration----------------
 builder.Services.AddScoped<IHRISRepository, HRISRepository>();
 builder.Services.AddScoped<IDapperConnection, DapperConnection>();
@@ -18,24 +17,17 @@ builder.Services.AddScoped<IStagingRepository, StagingRepository>();
 builder.Services.AddScoped<ICantierRepository, CantierRepository>();
 //------------------------------------------------------
 
-
 //------------------CORS Registration----------------
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          //policy.WithOrigins("https://localhost:7041",
-                          //                   "http://192.168.5.9:400",
-                          //                   "http://prod.atecmes.com:400",
-                          //                   "https://localhost:32536")
-                          //      .AllowAnyHeader();
                           policy.AllowAnyOrigin()
                                 .AllowAnyHeader();
                       });
 });
 //------------------------------------------------------
-
 
 //------------------Logger Configuration-----------------
 var logger = new LoggerConfiguration()
@@ -49,9 +41,6 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 //-------------------------------------------------------
 
-
-
-
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(ValidateModelAttribute));
@@ -61,15 +50,12 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 //----------------------Context Connection----------------------
 builder.Services.AddDbContext<HrisContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("HRIS_Connection"));
 });
 //---------------------------------------------------------------
-
-
 
 var app = builder.Build();
 
@@ -81,13 +67,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthorization();
-
 app.MapControllers();
 
-app.Run();
+app.Run("http://0.0.0.0:400");
+
 
 public partial class Program { }

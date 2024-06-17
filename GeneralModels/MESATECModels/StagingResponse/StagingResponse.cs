@@ -7,8 +7,8 @@ namespace ATEC_API.GeneralModels.MESATECModels.StagingResponse
 {
     public class StagingResponse
     {
-        public bool HasSetUp { get; set; }
-        public bool IsTrackout { get; set; }
+        public bool? HasSetUp { get; set; }
+        public bool? IsTrackout { get; set; }
 
     }
 }
