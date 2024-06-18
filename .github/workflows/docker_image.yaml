@@ -21,7 +21,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            /rucatzy/api_atec_image:latest
+            rucatzy/api_atec_image:latest
 
       - name: Logout of Docker Hub
         run: docker logout
