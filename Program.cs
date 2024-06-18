@@ -51,10 +51,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //----------------------Context Connection----------------------
-// builder.Services.AddDbContext<HrisContext>(option =>
-// {
-//     option.UseSqlServer(builder.Configuration.GetConnectionString("HRIS_Connection"));
-// });
+builder.Services.AddDbContext<HrisContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("HRIS_Connection"));
+});
 //---------------------------------------------------------------
 
 var app = builder.Build();
