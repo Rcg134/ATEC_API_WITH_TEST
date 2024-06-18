@@ -1,3 +1,9 @@
+# Docker Command
+
+## - Sample Default Image for .NET8
+
+```bash
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /app
@@ -26,3 +32,42 @@ RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.
 EXPOSE 400
 
 ENTRYPOINT ["dotnet", "ATEC_API.dll"]
+
+```
+
+## - Creating Image
+
+```bash
+
+docker build  -t api_atec_image .
+
+```
+
+## - Creating Container
+
+```bash
+
+docker run  -p 400:400 api_atec_image
+
+```
+
+# Docker to DockerHub
+
+## - Tag your Image
+
+```bash
+
+docker tag api_atec_image:latest docker.io/rucatzy/api_atec_image:latest
+
+
+```
+
+## - Push to your Docker Hub
+
+```bash
+
+docker tag api_atec_image:latest docker.io/rucatzy/api_atec_image:latest
+
+(docker.io(default)/(username)/(imageName))
+
+```
