@@ -20,8 +20,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: |
-            docker.io/rucatzy/atec-api_image:latest
 
       - name: Logout of Docker Hub
         run: docker logout
