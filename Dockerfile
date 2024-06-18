@@ -8,7 +8,7 @@ COPY ATEC_API.csproj ./
 
 RUN dotnet restore
 
-COPY . .
+COPY . ./
 
 RUN dotnet publish ATEC_API.csproj -c Release -o /app/publish
 
