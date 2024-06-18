@@ -24,7 +24,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/atec_api_image:latest
+          tags: rucatzy/atec_api_image:latest
 
       - name: Logout of Docker Hub
         run: docker logout
