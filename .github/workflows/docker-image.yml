@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - main  # Adjust to your main branch
+      - main 
 
 jobs:
   build:
@@ -12,14 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
-    - name: Set up .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
-
-    - name: Build and publish .NET project
-      run: dotnet publish -c Release -o out
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -36,5 +28,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/atec_api_image:latest
-
+        tags: ${{ secrets.DOCKER_USERNAME }}/your-repo-name:latest
