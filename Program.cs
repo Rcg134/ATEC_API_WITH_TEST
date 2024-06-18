@@ -51,10 +51,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //----------------------Context Connection----------------------
-builder.Services.AddDbContext<HrisContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("HRIS_Connection"));
-});
+// builder.Services.AddDbContext<HrisContext>(option =>
+// {
+//     option.UseSqlServer(builder.Configuration.GetConnectionString("HRIS_Connection"));
+// });
 //---------------------------------------------------------------
 
 var app = builder.Build();
@@ -71,7 +71,6 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 app.MapControllers();
 
-//app.Run("http://localhost:400");
-app.Run("http://localhost:400");
+app.Run("http://0.0.0.0:400");
 
 public partial class Program { }
