@@ -71,6 +71,8 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run("http://0.0.0.0:431");
+// app.Run("http://0.0.0.0:431");
+
+app.Run();
 
 public partial class Program { }
