@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using ATEC_API.Data.DTO.Cantier;
 using ATEC_API.Data.IRepositories;
@@ -18,25 +19,54 @@ namespace ATEC_API.Data.Repositories
             _dapperConnection = dapperConnection;
         }
 
-        public async Task<CantierResponse> GetLotDetails(CantierDTO cantierDTO)
+        public async Task<IEnumerable<CantierResponse>>? GetLotDetails(CantierDTO cantierDTO)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var LotDetails = await sqlConnection.QueryAsync<CantierResponse>(
+                                                                    CantierSP.usp_CANTIER_GetLotTrackInOut,
+                                                                    new
+                                                                    {
+                                                                        LotNumber = cantierDTO.LotNumber,
+                                                                        Mode = 3
+                                                                    },
+                                                                    commandType: CommandType.StoredProcedure
+                                                                    );
+            return LotDetails;
+        }
+
+        public async Task<CantierResponse>? GetTrackInDetails(CantierDTO cantierDTO)
         {
             await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
 
             var LotDetails = await sqlConnection.QueryFirstOrDefaultAsync<CantierResponse>(
-                                                                    CantierSP.usp_CANTIER_GetLotDetails,
+                                                                    CantierSP.usp_CANTIER_GetLotTrackInOut,
                                                                     new
                                                                     {
-                                                                        LotNumber = cantierDTO.LotNumber
+                                                                        LotNumber = cantierDTO.LotNumber,
+                                                                        Mode = 1
                                                                     },
                                                                     commandType: CommandType.StoredProcedure
                                                                     );
-            if (LotDetails == null)
-            {
-                return null;
-            }
 
             return LotDetails;
         }
 
+        public async Task<CantierResponse>? GetTrackOutDetails(CantierDTO cantierDTO)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var LotDetails = await sqlConnection.QueryFirstOrDefaultAsync<CantierResponse>(
+                                                                    CantierSP.usp_CANTIER_GetLotTrackInOut,
+                                                                    new
+                                                                    {
+                                                                        LotNumber = cantierDTO.LotNumber,
+                                                                        Mode = 2
+                                                                    },
+                                                                    commandType: CommandType.StoredProcedure
+                                                                    );
+
+            return LotDetails;
+        }
     }
 }

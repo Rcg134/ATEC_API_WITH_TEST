@@ -25,6 +25,10 @@
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DomainModels\CantierDomainModel\" />
+  </ItemGroup>
+
   <!-- add this to remove error duplicate assembly -->
   <PropertyGroup>
       <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
