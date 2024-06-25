@@ -2,6 +2,7 @@ using System.Text.Json;
 using ATEC_API.Data.DTO.StagingDTO;
 using ATEC_API.Data.IRepositories;
 using ATEC_API.GeneralModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,6 +10,7 @@ namespace ATEC_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class StagingController : Controller
     {
         private readonly IStagingRepository _stagingRepository;

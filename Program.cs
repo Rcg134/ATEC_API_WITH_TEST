@@ -1,7 +1,9 @@
 using ATEC_API.Data.Context;
 using ATEC_API.Data.IRepositories;
 using ATEC_API.Data.Repositories;
+using ATEC_API.Context;
 using ATEC_API.Filters;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -50,13 +52,27 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 //----------------------Context Connection----------------------
 builder.Services.AddDbContext<HrisContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("HRIS_Connection"));
 });
+
+builder.Services.AddDbContext<UserContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("CentralAccess_Connection"));
+});
 //---------------------------------------------------------------
 
+
+//----------------------Auth Config----------------------
+builder.Services.AddAuthentication();
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+                .AddEntityFrameworkStores<UserContext>();
+
+//-------------------------------------------------------
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,6 +82,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapIdentityApi<IdentityUser>();
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
