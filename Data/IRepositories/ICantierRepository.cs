@@ -4,6 +4,8 @@ namespace ATEC_API.Data.IRepositories
 {
     public interface ICantierRepository
     {
-        Task<CantierResponse> GetLotDetails(CantierDTO cantierDTO);
+        Task<IEnumerable<CantierResponse>>? GetLotDetails(CantierDTO cantierDTO);
+        Task<CantierResponse>? GetTrackInDetails(CantierDTO cantierDTO);
+        Task<CantierResponse>? GetTrackOutDetails(CantierDTO cantierDTO);
     }
 }

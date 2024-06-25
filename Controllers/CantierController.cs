@@ -31,5 +31,40 @@ namespace ATEC_API.Controllers
                 Details = getLotDetails,
             });
         }
+
+        [HttpGet("GetLotDetailsTrackIn")]
+        public async Task<IActionResult> GetLotDetailsTrackIn([FromHeader] string paramLotNumber)
+        {
+            var cantier = new CantierDTO
+            {
+                LotNumber = paramLotNumber
+            };
+
+            var getTrackInDetails = await _cantierRepository.GetTrackInDetails(cantier);
+
+            return Ok(new GeneralResponse
+            {
+                Details = getTrackInDetails,
+            });
+        }
+
+        [HttpGet("GetLotDetailsTrackOut")]
+        public async Task<IActionResult> GetLotDetailsTrackOut([FromHeader] string paramLotNumber)
+        {
+            var cantier = new CantierDTO
+            {
+                LotNumber = paramLotNumber
+            };
+
+            var getTrackInDetails = await _cantierRepository.GetTrackOutDetails(cantier);
+
+            return Ok(new GeneralResponse
+            {
+                Details = getTrackInDetails,
+            });
+        }
+
+
+
     }
 }

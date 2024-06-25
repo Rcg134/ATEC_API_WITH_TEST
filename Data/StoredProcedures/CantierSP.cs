@@ -7,5 +7,7 @@ namespace ATEC_API.Data.StoredProcedures
     public class CantierSP
     {
         public static string usp_CANTIER_GetLotDetails = "usp_CANTIER_LotNumber_Details";
+
+        public static string usp_CANTIER_GetLotTrackInOut = "usp_CANTIER_LotNumber_TrackInOut_Details";
     }
 }
