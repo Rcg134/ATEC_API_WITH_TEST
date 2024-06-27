@@ -6,11 +6,10 @@ using ATEC_API.Filters;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using ATEC_API.ExtentionServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 //------------------Service Registration----------------
 builder.Services.AddScoped<IHRISRepository, HRISRepository>();
@@ -19,29 +18,11 @@ builder.Services.AddScoped<IStagingRepository, StagingRepository>();
 builder.Services.AddScoped<ICantierRepository, CantierRepository>();
 //------------------------------------------------------
 
-//------------------CORS Registration----------------
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.AllowAnyOrigin()
-                                .AllowAnyHeader();
-                      });
-});
-//------------------------------------------------------
-
-//------------------Logger Configuration-----------------
-var logger = new LoggerConfiguration()
-                          .WriteTo.Console()
-                          .WriteTo.File("Logs/ATECAPI.txt", rollingInterval: RollingInterval.Day)
-                          .MinimumLevel
-                          .Information()
-                          .CreateLogger();
-
+builder.Services.ConfigureCors();
+builder.Services.ConfigureLogger(builder.Configuration);
 builder.Logging.ClearProviders();
-builder.Logging.AddSerilog(logger);
-//-------------------------------------------------------
+builder.Logging.AddSerilog(Log.Logger);
+builder.Services.ConfigureDatabasesContext(builder.Configuration);
 
 builder.Services.AddControllers(options =>
 {
@@ -51,20 +32,6 @@ builder.Services.AddControllers(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-//----------------------Context Connection----------------------
-builder.Services.AddDbContext<HrisContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("HRIS_Connection"));
-});
-
-builder.Services.AddDbContext<UserContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("CentralAccess_Connection"));
-});
-//---------------------------------------------------------------
-
 
 //----------------------Auth Config----------------------
 builder.Services.AddAuthentication();
@@ -84,7 +51,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapIdentityApi<IdentityUser>();
 app.UseHttpsRedirection();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.MapControllers();
 
