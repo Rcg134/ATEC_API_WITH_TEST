@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using ATEC_API.ExtentionServices;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,13 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
                 .AddEntityFrameworkStores<UserContext>();
 
 //-------------------------------------------------------
+
+
+
+builder.Services.AddHealthChecks()
+    .AddCheck<DatabaseHealthCheck>("custom-sql",HealthStatus.Unhealthy);
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,6 +59,12 @@ if (app.Environment.IsDevelopment())
 
 app.MapIdentityApi<IdentityUser>();
 app.UseHttpsRedirection();
+
+
+app.MapHealthChecks("health");
+
+
+
 app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.MapControllers();
