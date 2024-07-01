@@ -6,6 +6,7 @@ using Serilog.Core;
 using ATEC_API.Data.Context;
 using ATEC_API.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace ATEC_API.ExtentionServices
 {
@@ -61,6 +62,14 @@ namespace ATEC_API.ExtentionServices
             {
                 options.UseSqlServer(configuration.GetConnectionString("CentralAccess_Connection"));
             });
+        }
+       #endregion
+
+      #region HealthCheck
+        public static void ConfigureHealthCheck(this IServiceCollection services)
+        {
+            services.AddHealthChecks().
+                    AddCheck<DatabaseHealthCheck>("custom-sql",HealthStatus.Unhealthy);; 
         }
        #endregion
 

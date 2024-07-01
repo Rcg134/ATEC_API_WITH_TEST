@@ -24,6 +24,7 @@ builder.Services.ConfigureLogger(builder.Configuration);
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(Log.Logger);
 builder.Services.ConfigureDatabasesContext(builder.Configuration);
+builder.Services.ConfigureHealthCheck();
 
 builder.Services.AddControllers(options =>
 {
@@ -41,11 +42,6 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
                 .AddEntityFrameworkStores<UserContext>();
 
 //-------------------------------------------------------
-
-
-
-builder.Services.AddHealthChecks()
-    .AddCheck<DatabaseHealthCheck>("custom-sql",HealthStatus.Unhealthy);
 
 
 var app = builder.Build();
