@@ -19,6 +19,23 @@ namespace ATEC_API.Data.Repositories
             _dapperConnection = dapperConnection;
         }
 
+        public async Task<IEnumerable<RecipeLoadResponse>>? RecipeLoadDetails(CantierDTO cantierDTO)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var LotDetails = await sqlConnection.QueryAsync<RecipeLoadResponse>(
+                                                                    CantierSP.usp_CANTIER_GetLotTrackInOut,
+                                                                    new
+                                                                    {
+                                                                        LotNumber = cantierDTO.LotNumber,
+                                                                        Mode = 4
+                                                                    },
+                                                                    commandType: CommandType.StoredProcedure
+                                                                    );
+
+            return LotDetails;
+        }
+
         public async Task<IEnumerable<CantierResponse>>? GetLotDetails(CantierDTO cantierDTO)
         {
             await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
@@ -68,5 +85,7 @@ namespace ATEC_API.Data.Repositories
 
             return LotDetails;
         }
+
+        
     }
 }
