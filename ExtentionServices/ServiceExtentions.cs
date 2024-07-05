@@ -19,8 +19,11 @@ namespace ATEC_API.ExtentionServices
               options.AddPolicy("CorsPolicy",
                                 policy =>
                                 {
-                                    policy.AllowAnyOrigin()
-                                          .AllowAnyHeader();
+                                    policy.WithOrigins("http://localhost:5099", "http://example.com")
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod()
+                                          .AllowCredentials();
+                                          
                                 });
           });
        #endregion
