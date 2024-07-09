@@ -43,7 +43,6 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 
 //-------------------------------------------------------
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,18 +54,12 @@ if (app.Environment.IsDevelopment())
 
 app.MapIdentityApi<IdentityUser>();
 app.UseHttpsRedirection();
-
-
 app.MapHealthChecks("health");
-
-
-
 app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.MapControllers();
 
 // app.Run("http://0.0.0.0:431");
-
 app.Run();
 
 public partial class Program { }
