@@ -19,11 +19,11 @@ namespace ATEC_API.ExtentionServices
               options.AddPolicy("CorsPolicy",
                                 policy =>
                                 {
-                                    policy.WithOrigins("http://localhost:5099", "http://example.com")
+                                    policy.WithOrigins("http://192.168.5.9:400",
+                                                      "http://prod.atecmes.com:400")
                                           .AllowAnyHeader()
                                           .AllowAnyMethod()
-                                          .AllowCredentials();
-                                          
+                                          .AllowCredentials();                                         
                                 });
           });
        #endregion
