@@ -15,15 +15,19 @@ namespace ATEC_API.ExtentionServices
       #region CORS
        public static void ConfigureCors(this IServiceCollection services) =>
            services.AddCors(options =>
-          {
-              options.AddPolicy("CorsPolicy",
+           {
+               options.AddPolicy("CorsPolicy",
                                 policy =>
                                 {
-                                    policy.WithOrigins("http://192.168.5.9:400",
-                                                      "http://prod.atecmes.com:400")
+                                    policy.WithOrigins("http://192.168.5.9:400/",
+                                                      "http://prod.atecmes.com:400",
+                                                      "http://localhost:6880",
+                                                      "https://localhost:7250",
+                                                      "http://localhost:2711",
+                                                      "https://localhost:7041")
                                           .AllowAnyHeader()
                                           .AllowAnyMethod()
-                                          .AllowCredentials();                                         
+                                          .AllowCredentials();
                                 });
           });
        #endregion

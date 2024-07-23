@@ -17,6 +17,27 @@ namespace ATEC_API.Data.Repositories
         {
             _dapperConnection = dapperConnection;
         }
+
+        public async Task<IEnumerable<MaterialStagingResponse>>? GetMaterialDetail(MaterialStagingDTO materialStagingDTO)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var MaterialDetails = await sqlConnection.QueryAsync<MaterialStagingResponse>(
+                                                                            StagingSP.usp_Material_Details,
+                                                                            new
+                                                                            {
+                                                                                SID = materialStagingDTO.Sid,
+                                                                                MaterialID = materialStagingDTO.MaterialId,
+                                                                                Serial = materialStagingDTO.Serial,
+                                                                                ExpirationDate = materialStagingDTO.ExpirationDate,
+                                                                                CustomerCode = materialStagingDTO.CustomerCode,
+                                                                                MaterialType = materialStagingDTO.MaterialType
+                                                                            },
+                                                                            commandType: CommandType.StoredProcedure
+                                                                            );
+            return MaterialDetails;
+        }
+
         public async Task<StagingResponse> IsTrackOut(StagingDTO stagingDTO)
         {
             await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
