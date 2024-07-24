@@ -13,5 +13,7 @@ namespace ATEC_API.Data.StoredProcedures
         public static string usp_Staging_IsTrackOut_Test = "usp_Staging_IsTrackOut_Test";
 
         public static string usp_Material_Details = "usp_MTL_Material_Details";
+
+        public static string usp_Material_Customer = "usp_MTL_MaterialType_GetCustomer";
     }
 }

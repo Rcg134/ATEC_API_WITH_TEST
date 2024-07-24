@@ -8,9 +8,6 @@ namespace ATEC_API.Data.IRepositories
     {
         Task<StagingResponse> IsTrackOut(StagingDTO stagingDTO);
         Task<IEnumerable<MaterialStagingResponse>>? GetMaterialDetail(MaterialStagingDTO materialStagingDTO);
-
-
-
-
+        Task<IEnumerable<MaterialCustomerResponse>>? GetMaterialCustomer(int paramMaterialType);
     }
 }

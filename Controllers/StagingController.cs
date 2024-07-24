@@ -71,6 +71,16 @@ namespace ATEC_API.Controllers
             });
         }
 
+        [HttpGet("GetMaterialCustomer")]
+        public async Task<IActionResult> GetMaterialCustomer([FromHeader] int paramMaterialType)
+        {
+            var getCustomer = await _stagingRepository.GetMaterialCustomer(paramMaterialType);
+            return Ok(new GeneralResponse
+            {
+                Details = getCustomer
+            });
+        }
+
         //[HttpPost("GetEpoxyDetails")]
         //public async Task<IActionResult> GetEpoxyDetails([FromBody] MaterialStaging staging)
         //{
