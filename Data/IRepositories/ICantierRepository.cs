@@ -7,5 +7,6 @@ namespace ATEC_API.Data.IRepositories
         Task<IEnumerable<CantierResponse>>? GetLotDetails(CantierDTO cantierDTO);
         Task<CantierResponse>? GetTrackInDetails(CantierDTO cantierDTO);
         Task<CantierResponse>? GetTrackOutDetails(CantierDTO cantierDTO);
+        Task<IEnumerable<RecipeLoadResponse>>? RecipeLoadDetails(CantierDTO cantierDTO);
     }
 }
