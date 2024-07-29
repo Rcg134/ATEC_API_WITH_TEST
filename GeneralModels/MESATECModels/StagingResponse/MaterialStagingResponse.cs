@@ -17,7 +17,7 @@ namespace ATEC_API.GeneralModels.MESATECModels.StagingResponse
         public string? thawingIn { get; set; }
         public string? thawingOut { get; set; }
         public string? workLifeEnd { get; set; }
-        public DateOnly? expirationDate { get; set; }
+        public string? expirationDate { get; set; }
         public string? msg { get; set; }
     }
 }

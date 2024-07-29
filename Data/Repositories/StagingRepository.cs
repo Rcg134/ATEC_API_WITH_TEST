@@ -46,7 +46,8 @@ namespace ATEC_API.Data.Repositories
                                                                                 Serial = materialStagingDTO.Serial,
                                                                                 ExpirationDate = materialStagingDTO.ExpirationDate,
                                                                                 CustomerCode = materialStagingDTO.CustomerCode,
-                                                                                MaterialType = materialStagingDTO.MaterialType
+                                                                                MaterialType = materialStagingDTO.MaterialType,
+                                                                                Usercode = materialStagingDTO.Usercode
                                                                             },
                                                                             commandType: CommandType.StoredProcedure
                                                                             );

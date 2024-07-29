@@ -50,8 +50,9 @@ namespace ATEC_API.Controllers
                                                          [FromHeader] string paramMaterialId,
                                                          [FromHeader] string paramSerial,
                                                          [FromHeader] string paramExpirationDate,
-                                                         [FromHeader] string paramCustomerCode,
-                                                         [FromHeader] string paramMaterialType)
+                                                         [FromHeader] int paramCustomerCode,
+                                                         [FromHeader] int paramMaterialType,
+                                                         [FromHeader] int paramUserCode)
         {
             var materialStaging = new MaterialStagingDTO
             {
@@ -60,7 +61,8 @@ namespace ATEC_API.Controllers
                 Serial = paramSerial,
                 ExpirationDate = paramExpirationDate,
                 CustomerCode = paramCustomerCode,
-                MaterialType = paramMaterialType
+                MaterialType = paramMaterialType,
+                Usercode = paramUserCode
             };
 
             var getEpoxyDetails = await _stagingRepository.GetMaterialDetail(materialStaging);

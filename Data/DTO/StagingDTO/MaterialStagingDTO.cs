@@ -18,9 +18,11 @@ namespace ATEC_API.Data.DTO.StagingDTO
         public string ExpirationDate { get; set; }
 
         [Required]
-        public string CustomerCode { get; set; }
+        public int CustomerCode { get; set; }
 
         [Required]
-        public string MaterialType { get; set; }
+        public int MaterialType { get; set; }
+        [Required]
+        public int Usercode { get; set; }
     }
 }
