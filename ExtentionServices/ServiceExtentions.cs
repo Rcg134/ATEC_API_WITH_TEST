@@ -21,6 +21,7 @@ namespace ATEC_API.ExtentionServices
                                 {
                                     policy.WithOrigins("http://192.168.5.9:400/",
                                                       "http://prod.atecmes.com:400",
+                                                      "http://192.168.1.65:500/",
                                                       "http://localhost:6880",
                                                       "https://localhost:7250",
                                                       "http://localhost:2711",
