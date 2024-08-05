@@ -18,6 +18,9 @@ namespace ATEC_API.GeneralModels.MESATECModels.StagingResponse
         public string? thawingOut { get; set; }
         public string? workLifeEnd { get; set; }
         public string? expirationDate { get; set; }
+        public bool? isLotExist { get; set; }
+        public bool? isEpoxyAssigned { get; set; }
+        public bool? isMachineExist { get; set; }
         public string? msg { get; set; }
     }
 }

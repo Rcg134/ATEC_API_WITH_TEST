@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Reflection.PortableExecutable;
 using ATEC_API.Data.DTO.StagingDTO;
 using ATEC_API.Data.IRepositories;
 using ATEC_API.Data.StoredProcedures;
@@ -73,6 +74,27 @@ namespace ATEC_API.Data.Repositories
             }
 
             return IsTrackOut;
+        }
+
+        public async Task<IEnumerable<MaterialStagingResponse>>? CheckLotNumber(MaterialStagingCheckParamDTO materialStaging)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var LotExist = await sqlConnection.QueryAsync<MaterialStagingResponse>(
+                                                                    StagingSP.usp_Check_Param,
+                                                                    new
+                                                                    {
+                                                                        LotAlias = materialStaging.LotNumber,
+                                                                        MachineNo = materialStaging.Machine,
+                                                                        CustomerCode = materialStaging.CustomerCode,
+                                                                        Mode = materialStaging.Mode,
+                                                                        SID = materialStaging.SID,
+                                                                        MaterialId = materialStaging.MaterialId,
+                                                                        Serial = materialStaging.Serial
+                                                                    },
+                                                                    commandType: CommandType.StoredProcedure
+                                                                    );
+            return LotExist;
         }
     }
 }

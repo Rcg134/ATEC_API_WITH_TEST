@@ -73,6 +73,35 @@ namespace ATEC_API.Controllers
             });
         }
 
+        [HttpGet("CheckLotNumber")]
+        public async Task<IActionResult> CheckParam([FromHeader] string paramLotNumber,
+                                                    [FromHeader] string? paramMachineNo,       
+                                                    [FromHeader] int paramCustomerCode,
+                                                    [FromHeader] int paramMode,
+                                                    [FromHeader] string paramSID,
+                                                    [FromHeader] string paramMaterialId,
+                                                    [FromHeader] string paramSerial)
+        {
+            var materialStaging = new MaterialStagingCheckParamDTO
+            {
+                LotNumber = paramLotNumber,
+                Machine = paramMachineNo,
+                CustomerCode = paramCustomerCode,
+                Mode = paramMode,
+                SID = paramSID,
+                MaterialId = paramMaterialId,
+                Serial = paramSerial
+            };
+
+
+            var checkLot = await _stagingRepository.CheckLotNumber(materialStaging);
+            return Ok(new GeneralResponse
+            {
+                Details = checkLot
+            });
+        }
+
+
         [HttpGet("GetMaterialCustomer")]
         public async Task<IActionResult> GetMaterialCustomer([FromHeader] int paramMaterialType)
         {
