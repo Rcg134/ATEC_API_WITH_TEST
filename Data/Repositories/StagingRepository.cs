@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 using ATEC_API.Data.DTO.StagingDTO;
 using ATEC_API.Data.IRepositories;
 using ATEC_API.Data.StoredProcedures;
@@ -18,6 +19,43 @@ namespace ATEC_API.Data.Repositories
         {
             _dapperConnection = dapperConnection;
         }
+
+        public async Task<IEnumerable<MaterialCustomerResponse>>? GetCustomerHistory(MaterialStagingHistoryDTO materialStaging)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var CustomerHistory = await sqlConnection.QueryAsync<MaterialCustomerResponse>(
+                                                                        StagingSP.usp_Material_History,
+                                                                        new
+                                                                        {
+                                                                            MaterialType = materialStaging.MaterialType,
+                                                                            Mode = materialStaging.Mode
+                                                                        },
+                                                                        commandType: CommandType.StoredProcedure
+                                                                        );
+            return CustomerHistory;
+        }
+
+        public async Task<IEnumerable<MaterialStagingHistoryResponse>>? GetMaterialHistory(MaterialStagingHistoryDTO materialHistory)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var MaterialHistory = await sqlConnection.QueryAsync<MaterialStagingHistoryResponse>(
+                                                                        StagingSP.usp_Material_History,
+                                                                        new
+                                                                        {
+                                                                            MaterialType = materialHistory.MaterialType,
+                                                                            CustomerCode = materialHistory.CustomerCode,
+                                                                            DateFrom = materialHistory.DateFrom,
+                                                                            DateTo = materialHistory.DateTo,
+                                                                            Mode = materialHistory.Mode
+                                                                        },
+                                                                        commandType: CommandType.StoredProcedure
+                                                                        );
+            return MaterialHistory;
+        }
+
+
 
         public async Task<IEnumerable<MaterialCustomerResponse>>? GetMaterialCustomer(int paramMaterialType)
         {
@@ -96,5 +134,7 @@ namespace ATEC_API.Data.Repositories
                                                                     );
             return LotExist;
         }
+
+        
     }
 }

@@ -112,29 +112,38 @@ namespace ATEC_API.Controllers
             });
         }
 
-        //[HttpPost("GetEpoxyDetails")]
-        //public async Task<IActionResult> GetEpoxyDetails([FromBody] MaterialStaging staging)
-        //{
-        //    var materialStaging = new MaterialStagingDTO
-        //    {
-        //        Sid = staging.paramSid,
-        //        MaterialId = staging.paramMaterialId,
-        //        Serial = staging.paramSerial,
-        //        ExpirationDate = staging.paramExpirationDate,
-        //        CustomerCode = staging.paramCustomerCode,
-        //        MaterialType = staging.paramMaterialType
-        //    };
-
-        //    var getEpoxyDetails = await _stagingRepository.GetMaterialDetail(materialStaging);
-
-        //    return Ok(new GeneralResponse
-        //    {
-        //        Details = getEpoxyDetails
-        //    });
-        //}
+        [HttpGet("GetMaterialHistory")]
+        public async Task<IActionResult> GetMaterialHistory([FromHeader] int paramMaterialType,
+                                                            [FromHeader] int paramCustomerCode,
+                                                            [FromHeader] DateTime? paramDateFrom,
+                                                            [FromHeader] DateTime? paramDateTo,
+                                                            [FromHeader] int paramMode)
+        {
+            var materialHistory = new MaterialStagingHistoryDTO
+            {
+                MaterialType = paramMaterialType,
+                CustomerCode = paramCustomerCode,
+                DateFrom = paramDateFrom,
+                DateTo = paramDateTo,
+                Mode = paramMode
+            };
 
 
+            if (paramMode == 1) {
+                var getCustomerHistory = await _stagingRepository.GetCustomerHistory(materialHistory);
 
+                return Ok(new GeneralResponse
+                {
+                    Details = getCustomerHistory
+                });
+            }
+
+            var getMaterialHistory = await _stagingRepository.GetMaterialHistory(materialHistory);
+            return Ok(new GeneralResponse
+            {
+                Details = getMaterialHistory
+            });
+        }
 
     }
 }
