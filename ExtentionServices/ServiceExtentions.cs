@@ -19,14 +19,15 @@ namespace ATEC_API.ExtentionServices
                options.AddPolicy("CorsPolicy",
                                 policy =>
                                 {
-                                    policy.WithOrigins("http://192.168.5.9:400/",
+                                    policy.WithOrigins("http://192.168.5.9:400",
                                                       "http://prod.atecmes.com:400",
-                                                      "http://192.168.1.65:500/",
+                                                      "http://192.168.1.65:500",
                                                       "http://localhost:6880",
                                                       "https://localhost:7250",
                                                       "http://localhost:2711",
                                                       "https://localhost:7041",
-                                                      "http://localhost:5099")
+                                                      "http://localhost:5099",
+                                                      "http://localhost:36777")
                                           .AllowAnyHeader()
                                           .AllowAnyMethod()
                                           .AllowCredentials();

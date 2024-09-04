@@ -45,6 +45,59 @@ namespace ATEC_API.Controllers
             });
         }
 
+        //New Material Thawing Flow
+        [HttpGet("GetMaterialDetails")]
+        public async Task<IActionResult> GetMaterialDetails([FromHeader] string paramSid,
+                                                            [FromHeader] string paramMaterialId,
+                                                            [FromHeader] string paramSerial,
+                                                            [FromHeader] string paramExpirationDate,
+                                                            [FromHeader] int paramMaterialType,
+                                                            [FromHeader] int paramUserCode)
+        {
+            var materialStaging = new MaterialStagingNewDTO
+            {
+                Sid = paramSid,
+                MaterialId = paramMaterialId,
+                Serial = paramSerial,
+                ExpirationDate = paramExpirationDate,
+                MaterialType = paramMaterialType,
+                Usercode = paramUserCode
+            };
+
+            var getMaterialDetails = await _stagingRepository.GetMaterialDetailNew(materialStaging);
+
+            return Ok(new GeneralResponse
+            {
+                Details = getMaterialDetails
+            });
+        }
+
+        [HttpGet("GetMaterialLotMachine")]
+        public async Task<IActionResult> GetMaterialLotMachine([FromHeader] string paramLotNumber,
+                                                               [FromHeader] string paramMachineNo,
+                                                               [FromHeader] int paramMode,
+                                                               [FromHeader] string paramSid,
+                                                               [FromHeader] string paramMaterialId,
+                                                               [FromHeader] string paramSerial)
+        {
+            var MaterialStaging = new MaterialStagingLMDTO
+            {
+                LotAlias = paramLotNumber,
+                MachineNo = paramMachineNo,
+                Mode = paramMode,
+                Sid = paramSid,
+                MaterialId = paramMaterialId,
+                Serial = paramSerial
+            };
+
+            var getLMDetails = await _stagingRepository.GetMaterialLotMachine(MaterialStaging);
+
+            return Ok(new GeneralResponse
+            {
+                Details = getLMDetails
+            });
+        }
+
         [HttpGet("GetEpoxyDetails")]
         public async Task<IActionResult> GetEpoxyDetails([FromHeader] string paramSid,
                                                          [FromHeader] string paramMaterialId,

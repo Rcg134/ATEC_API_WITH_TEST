@@ -12,5 +12,10 @@ namespace ATEC_API.Data.IRepositories
         Task<IEnumerable<MaterialStagingResponse>>? CheckLotNumber(MaterialStagingCheckParamDTO materialStaging);
         Task<IEnumerable<MaterialCustomerResponse>>? GetCustomerHistory(MaterialStagingHistoryDTO materialHistory);
         Task<IEnumerable<MaterialStagingHistoryResponse>>? GetMaterialHistory(MaterialStagingHistoryDTO materialHistory);
+        //New Material Staging Flow
+        Task<IEnumerable<MaterialStagingResponse>>? GetMaterialDetailNew(MaterialStagingNewDTO materialStagingNewDTO);
+        Task<IEnumerable<MaterialStagingResponse>>? GetMaterialLotMachine(MaterialStagingLMDTO materialStagingLMDTO);
+
+
     }
 }
