@@ -175,6 +175,24 @@ namespace ATEC_API.Data.Repositories
             return LotExist;
         }
 
-        
+        public async Task<IEnumerable<MaterialStagingResponse>>? GetMaterialDetailPG(MaterialStagingNewDTO materialStagingNewDTO)
+        {
+            await using SqlConnection sqlConnection = _dapperConnection.MES_ATEC_CreateConnection();
+
+            var MaterialDetails = await sqlConnection.QueryAsync<MaterialStagingResponse>(
+                StagingSP.usp_Material_InOut_PG,
+                new
+                {
+                    SID = materialStagingNewDTO.Sid,
+                    MaterialId = materialStagingNewDTO.MaterialId,
+                    Serial = materialStagingNewDTO.Serial,
+                    ExpirationDate = materialStagingNewDTO.ExpirationDate,
+                    MaterialType = materialStagingNewDTO.MaterialType,
+                    Usercode = materialStagingNewDTO.Usercode
+                },
+                commandType: CommandType.StoredProcedure
+                );
+            return MaterialDetails;
+        }
     }
 }

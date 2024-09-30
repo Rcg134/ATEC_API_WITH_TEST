@@ -16,6 +16,9 @@ namespace ATEC_API.Data.IRepositories
         Task<IEnumerable<MaterialStagingResponse>>? GetMaterialDetailNew(MaterialStagingNewDTO materialStagingNewDTO);
         Task<IEnumerable<MaterialStagingResponse>>? GetMaterialLotMachine(MaterialStagingLMDTO materialStagingLMDTO);
 
+        //Material Staging Panjit and Gem
+        Task<IEnumerable<MaterialStagingResponse>>? GetMaterialDetailPG(MaterialStagingNewDTO materialStagingNewDTO);
+
 
     }
 }

@@ -19,5 +19,10 @@ namespace ATEC_API.Data.StoredProcedures
         // New Material Thawing Flow
         public static string usp_Material_InOut_Endpoint = "usp_MTL_Material_InOut_Endpoint";
         public static string usp_Material_LotMachine_Endpoint = "usp_MTL_Material_Lot_Machine_Usage_Endpoint";
+
+        // Material Thawing for Panjit and Gem
+        public static string usp_Material_InOut_PG = "usp_MTL_Material_InOut_Endpoint_PG";
+
+
     }
 }
