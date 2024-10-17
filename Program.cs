@@ -17,6 +17,7 @@ builder.Services.AddScoped<IHRISRepository, HRISRepository>();
 builder.Services.AddScoped<IDapperConnection, DapperConnection>();
 builder.Services.AddScoped<IStagingRepository, StagingRepository>();
 builder.Services.AddScoped<ICantierRepository, CantierRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 //------------------------------------------------------
 
 builder.Services.ConfigureCors();

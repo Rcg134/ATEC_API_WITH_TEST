@@ -14,7 +14,7 @@ namespace ATEC_API.Controllers
     [Route("api/[controller]")]
     [Authorize]
     public class CantierController(ICantierRepository cantierRepository,
-                                   ILogger<CantierController> logger) : Controller
+                                   ILogger<CantierController> logger) : ControllerBase
     {
         private readonly ICantierRepository _cantierRepository = cantierRepository;
         private readonly ILogger<CantierController> _logger = logger;

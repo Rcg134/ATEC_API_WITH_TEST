@@ -1,18 +1,20 @@
-using System.Text.Json;
-using ATEC_API.Data.DTO.StagingDTO;
-using ATEC_API.Data.IRepositories;
-using ATEC_API.GeneralModels;
-using ATEC_API.GeneralModels.MESATECModels.StagingResponse;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
+// <copyright file="StagingController.cs" company="ATEC">
+// Copyright (c) ATEC. All rights reserved.
+// </copyright>
 
 namespace ATEC_API.Controllers
 {
+    using System.Text.Json;
+    using ATEC_API.Data.DTO.StagingDTO;
+    using ATEC_API.Data.IRepositories;
+    using ATEC_API.GeneralModels;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class StagingController : Controller
+    public class StagingController : ControllerBase
     {
         private readonly IStagingRepository _stagingRepository;
         private readonly ILogger<StagingController> _logger;
@@ -54,6 +56,8 @@ namespace ATEC_API.Controllers
                                                          [FromHeader] int paramMaterialType,
                                                          [FromHeader] int paramUserCode)
         {
+            _logger.LogInformation($"Invoking GetEpoxyDetails method");
+
             var materialStaging = new MaterialStagingDTO
             {
                 Sid = paramSid,
@@ -66,6 +70,8 @@ namespace ATEC_API.Controllers
             };
 
             var getEpoxyDetails = await _stagingRepository.GetMaterialDetail(materialStaging);
+
+            _logger.LogInformation($"Results {JsonSerializer.Serialize(getEpoxyDetails)}");
 
             return Ok(new GeneralResponse
             {
@@ -82,6 +88,8 @@ namespace ATEC_API.Controllers
                                                     [FromHeader] string paramMaterialId,
                                                     [FromHeader] string paramSerial)
         {
+            _logger.LogInformation($"Invoking CheckParam method");
+
             var materialStaging = new MaterialStagingCheckParamDTO
             {
                 LotNumber = paramLotNumber,
@@ -95,6 +103,9 @@ namespace ATEC_API.Controllers
 
 
             var checkLot = await _stagingRepository.CheckLotNumber(materialStaging);
+
+            _logger.LogInformation($"Results {JsonSerializer.Serialize(checkLot)}");
+
             return Ok(new GeneralResponse
             {
                 Details = checkLot
@@ -105,7 +116,12 @@ namespace ATEC_API.Controllers
         [HttpGet("GetMaterialCustomer")]
         public async Task<IActionResult> GetMaterialCustomer([FromHeader] int paramMaterialType)
         {
+            _logger.LogInformation($"Invoking GetMaterialCustomer method");
+
             var getCustomer = await _stagingRepository.GetMaterialCustomer(paramMaterialType);
+
+            _logger.LogInformation($"Results {JsonSerializer.Serialize(getCustomer)}");
+
             return Ok(new GeneralResponse
             {
                 Details = getCustomer
@@ -119,6 +135,8 @@ namespace ATEC_API.Controllers
                                                             [FromHeader] DateTime? paramDateTo,
                                                             [FromHeader] int paramMode)
         {
+            _logger.LogInformation($"Invoking GetMaterialHistory method");
+
             var materialHistory = new MaterialStagingHistoryDTO
             {
                 MaterialType = paramMaterialType,
@@ -132,13 +150,20 @@ namespace ATEC_API.Controllers
             if (paramMode == 1) {
                 var getCustomerHistory = await _stagingRepository.GetCustomerHistory(materialHistory);
 
+                _logger.LogInformation($"Results {JsonSerializer.Serialize(getCustomerHistory)}");
+
                 return Ok(new GeneralResponse
                 {
                     Details = getCustomerHistory
                 });
+
+              
             }
 
             var getMaterialHistory = await _stagingRepository.GetMaterialHistory(materialHistory);
+
+            _logger.LogInformation($"Results {JsonSerializer.Serialize(getMaterialHistory)}");
+
             return Ok(new GeneralResponse
             {
                 Details = getMaterialHistory
