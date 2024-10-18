@@ -19,7 +19,7 @@ namespace ATEC_API.Controllers
         private readonly IStagingRepository _stagingRepository;
         private readonly ILogger<StagingController> _logger;
 
-        public StagingController(IStagingRepository stagingRepository ,
+        public StagingController(IStagingRepository stagingRepository,
                                  ILogger<StagingController> logger)
         {
             _logger = logger;
