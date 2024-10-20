@@ -1,15 +1,13 @@
 
-using Serilog;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Serilog.Core;
-using ATEC_API.Data.Context;
-using ATEC_API.Context;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-
 namespace ATEC_API.ExtentionServices
 {
+    using ATEC_API.Context;
+    using ATEC_API.Data.Context;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Diagnostics.HealthChecks;
+    using Serilog;
+
     public static class ServiceExtentions
     {
       #region CORS
@@ -49,7 +47,7 @@ namespace ATEC_API.ExtentionServices
            });
         #endregion
 
-        #region Logger
+      #region Logger
         public static void ConfigureLogger(this IServiceCollection services , IConfiguration configuration) 
         {
            var currentDirectory = Directory.GetCurrentDirectory();
@@ -74,7 +72,7 @@ namespace ATEC_API.ExtentionServices
         }
         #endregion
 
-        #region Context
+      #region Context
         public static void ConfigureDatabasesContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<HrisContext>(options =>
