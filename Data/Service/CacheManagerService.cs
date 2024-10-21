@@ -60,7 +60,8 @@ namespace ATEC_API.Data.Service
             }
 
             var cacheEntryOptions = new MemoryCacheEntryOptions()
-                           .SetPriority(CacheItemPriority.NeverRemove);
+                           .SetPriority(CacheItemPriority.NeverRemove)
+                           .SetAbsoluteExpiration(TimeSpan.FromMinutes(10));
 
             await Task.Run(() => this._cache.Set(key, value, cacheEntryOptions));
         }
