@@ -2,12 +2,12 @@
 // Copyright (c) ATEC. All rights reserved.
 // </copyright>
 
-using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Threading.Tasks;
-
 namespace ATEC_API.Data.Service
 {
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.Caching.Memory;
+
     public class CacheManagerService
     {
         private readonly IMemoryCache _cache;
