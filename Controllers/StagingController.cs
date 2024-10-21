@@ -22,14 +22,14 @@ namespace ATEC_API.Controllers
         public StagingController(IStagingRepository stagingRepository,
                                  ILogger<StagingController> logger)
         {
-            _logger = logger;
-            _stagingRepository = stagingRepository;
+            this._logger = logger;
+            this._stagingRepository = stagingRepository;
         }
 
         [HttpGet("IsTrackOut")]
         public async Task<IActionResult> IsLotTrackOut([FromHeader] string paramLotAlias)
         {
-            _logger.LogInformation($"Invoking IsLotTrackOut method with {paramLotAlias} parameters");
+            this._logger.LogInformation($"Invoking IsLotTrackOut method with {paramLotAlias} parameters");
 
             var staging = new StagingDTO
             {
@@ -38,25 +38,25 @@ namespace ATEC_API.Controllers
 
             var isTrackOut = await _stagingRepository.IsTrackOut(staging);
 
+            this._logger.LogInformation($"{paramLotAlias} details are {JsonSerializer.Serialize(isTrackOut)}");
 
-            _logger.LogInformation($"{paramLotAlias} details are {JsonSerializer.Serialize(isTrackOut)}");
-
-            return Ok(new GeneralResponse
+            return this.Ok(new GeneralResponse
             {
                 Details = isTrackOut,
             });
         }
 
         [HttpGet("GetEpoxyDetails")]
-        public async Task<IActionResult> GetEpoxyDetails([FromHeader] string paramSid,
-                                                         [FromHeader] string paramMaterialId,
-                                                         [FromHeader] string paramSerial,
-                                                         [FromHeader] string paramExpirationDate,
-                                                         [FromHeader] int paramCustomerCode,
-                                                         [FromHeader] int paramMaterialType,
-                                                         [FromHeader] int paramUserCode)
+        public async Task<IActionResult> GetEpoxyDetails(
+            [FromHeader] string paramSid,
+            [FromHeader] string paramMaterialId,
+            [FromHeader] string paramSerial,
+            [FromHeader] string paramExpirationDate,
+            [FromHeader] int paramCustomerCode,
+            [FromHeader] int paramMaterialType,
+            [FromHeader] int paramUserCode)
         {
-            _logger.LogInformation($"Invoking GetEpoxyDetails method");
+            this._logger.LogInformation($"Invoking GetEpoxyDetails method");
 
             var materialStaging = new MaterialStagingDTO
             {
@@ -66,29 +66,30 @@ namespace ATEC_API.Controllers
                 ExpirationDate = paramExpirationDate,
                 CustomerCode = paramCustomerCode,
                 MaterialType = paramMaterialType,
-                Usercode = paramUserCode
+                Usercode = paramUserCode,
             };
 
             var getEpoxyDetails = await _stagingRepository.GetMaterialDetail(materialStaging);
 
-            _logger.LogInformation($"Results {JsonSerializer.Serialize(getEpoxyDetails)}");
+            this._logger.LogInformation($"Results {JsonSerializer.Serialize(getEpoxyDetails)}");
 
-            return Ok(new GeneralResponse
+            return this.Ok(new GeneralResponse
             {
-                Details = getEpoxyDetails
+                Details = getEpoxyDetails,
             });
         }
 
         [HttpGet("CheckLotNumber")]
-        public async Task<IActionResult> CheckParam([FromHeader] string paramLotNumber,
-                                                    [FromHeader] string? paramMachineNo,       
-                                                    [FromHeader] int paramCustomerCode,
-                                                    [FromHeader] int paramMode,
-                                                    [FromHeader] string paramSID,
-                                                    [FromHeader] string paramMaterialId,
-                                                    [FromHeader] string paramSerial)
+        public async Task<IActionResult> CheckParam(
+            [FromHeader] string paramLotNumber,
+            [FromHeader] string? paramMachineNo,
+            [FromHeader] int paramCustomerCode,
+            [FromHeader] int paramMode,
+            [FromHeader] string paramSID,
+            [FromHeader] string paramMaterialId,
+            [FromHeader] string paramSerial)
         {
-            _logger.LogInformation($"Invoking CheckParam method");
+            this._logger.LogInformation($"Invoking CheckParam method");
 
             var materialStaging = new MaterialStagingCheckParamDTO
             {
@@ -101,41 +102,40 @@ namespace ATEC_API.Controllers
                 Serial = paramSerial
             };
 
-
             var checkLot = await _stagingRepository.CheckLotNumber(materialStaging);
 
-            _logger.LogInformation($"Results {JsonSerializer.Serialize(checkLot)}");
+            this._logger.LogInformation($"Results {JsonSerializer.Serialize(checkLot)}");
 
-            return Ok(new GeneralResponse
+            return this.Ok(new GeneralResponse
             {
                 Details = checkLot
             });
         }
 
-
         [HttpGet("GetMaterialCustomer")]
         public async Task<IActionResult> GetMaterialCustomer([FromHeader] int paramMaterialType)
         {
-            _logger.LogInformation($"Invoking GetMaterialCustomer method");
+            this._logger.LogInformation($"Invoking GetMaterialCustomer method");
 
             var getCustomer = await _stagingRepository.GetMaterialCustomer(paramMaterialType);
 
-            _logger.LogInformation($"Results {JsonSerializer.Serialize(getCustomer)}");
+            this._logger.LogInformation($"Results {JsonSerializer.Serialize(getCustomer)}");
 
-            return Ok(new GeneralResponse
+            return this.Ok(new GeneralResponse
             {
-                Details = getCustomer
+                Details = getCustomer,
             });
         }
 
         [HttpGet("GetMaterialHistory")]
-        public async Task<IActionResult> GetMaterialHistory([FromHeader] int paramMaterialType,
-                                                            [FromHeader] int paramCustomerCode,
-                                                            [FromHeader] DateTime? paramDateFrom,
-                                                            [FromHeader] DateTime? paramDateTo,
-                                                            [FromHeader] int paramMode)
+        public async Task<IActionResult> GetMaterialHistory(
+            [FromHeader] int paramMaterialType,
+            [FromHeader] int paramCustomerCode,
+            [FromHeader] DateTime? paramDateFrom,
+            [FromHeader] DateTime? paramDateTo,
+            [FromHeader] int paramMode)
         {
-            _logger.LogInformation($"Invoking GetMaterialHistory method");
+            this._logger.LogInformation($"Invoking GetMaterialHistory method");
 
             var materialHistory = new MaterialStagingHistoryDTO
             {
@@ -143,32 +143,49 @@ namespace ATEC_API.Controllers
                 CustomerCode = paramCustomerCode,
                 DateFrom = paramDateFrom,
                 DateTo = paramDateTo,
-                Mode = paramMode
+                Mode = paramMode,
             };
 
-
-            if (paramMode == 1) {
+            if (paramMode == 1)
+            {
                 var getCustomerHistory = await _stagingRepository.GetCustomerHistory(materialHistory);
 
-                _logger.LogInformation($"Results {JsonSerializer.Serialize(getCustomerHistory)}");
+                this._logger.LogInformation($"Results {JsonSerializer.Serialize(getCustomerHistory)}");
 
-                return Ok(new GeneralResponse
+                return this.Ok(new GeneralResponse
                 {
-                    Details = getCustomerHistory
+                    Details = getCustomerHistory,
                 });
-
-              
             }
 
             var getMaterialHistory = await _stagingRepository.GetMaterialHistory(materialHistory);
 
-            _logger.LogInformation($"Results {JsonSerializer.Serialize(getMaterialHistory)}");
+            this._logger.LogInformation($"Results {JsonSerializer.Serialize(getMaterialHistory)}");
 
-            return Ok(new GeneralResponse
+            return this.Ok(new GeneralResponse
             {
-                Details = getMaterialHistory
+                Details = getMaterialHistory,
             });
         }
 
+        [HttpGet("GetHistoryDetails")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetHistoryDetails([FromQuery]MagazineHistoryInput magazineHistoryInput)
+        {
+            this._logger.LogInformation("GetHistoryDetails method is invoking");
+
+            var magazineDetailList = Enumerable.Empty<MagazineHistoryDTO>();
+            var pageResult = new PageResultsResponse();
+
+            (magazineDetailList, pageResult) = await this._stagingRepository.DapperPagination(magazineHistoryInput);
+
+            this._logger.LogInformation($"Details {JsonSerializer.Serialize(magazineDetailList)}");
+
+            return this.Ok(new GeneralResponse
+            {
+                Details = magazineDetailList,
+                Response = pageResult,
+            });
+        }
     }
 }

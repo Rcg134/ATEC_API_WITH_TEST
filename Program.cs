@@ -1,6 +1,7 @@
 using ATEC_API.Context;
 using ATEC_API.Data.IRepositories;
 using ATEC_API.Data.Repositories;
+using ATEC_API.Data.Service;
 using ATEC_API.ExtentionServices;
 using ATEC_API.Filters;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,7 @@ builder.Services.AddScoped<IDapperConnection, DapperConnection>();
 builder.Services.AddScoped<IStagingRepository, StagingRepository>();
 builder.Services.AddScoped<ICantierRepository, CantierRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<DapperModelPagination>();
 //------------------------------------------------------
 
 builder.Services.ConfigureCorsDev();

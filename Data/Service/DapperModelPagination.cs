@@ -4,12 +4,11 @@
 
 namespace ATEC_API.Data.Service
 {
+    using System.Data;
     using ATEC_API.Data.IRepositories;
     using ATEC_API.GeneralModels;
     using Dapper;
-    using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Data.SqlClient;
-    using System.Data;
 
     public class DapperModelPagination
     {
@@ -20,20 +19,20 @@ namespace ATEC_API.Data.Service
             this._dapperConnection = dapperConnection;
         }
 
-        public async Task<(IEnumerable<T> accounts,
+        public async Task<(IEnumerable<T> dataList,
                            PageResultsResponse pageResultsResponse)>
-            GetAccountsAndPagingInfoAsync<T>(String SP,
-                                              DynamicParameters parameters)
+            GetDetailsAndPagingInfoAsync<T>(String SP,
+                                             DynamicParameters parameters)
         {
             await using SqlConnection sqlConnection = _dapperConnection
                       .MES_ATEC_CreateConnection();
 
             using (var multi = await sqlConnection.QueryMultipleAsync(SP, parameters, commandType: CommandType.StoredProcedure))
             {
-                var accounts = await multi.ReadAsync<T>();
+                var dataList = await multi.ReadAsync<T>();
                 var pagingInfo = (await multi.ReadAsync<PageResultsResponse>()).SingleOrDefault();
 
-                return (accounts, pagingInfo);
+                return (dataList, pagingInfo);
             }
         }
     }

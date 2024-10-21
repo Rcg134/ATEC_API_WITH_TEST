@@ -1,23 +1,28 @@
-using System;
-using System.Data;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices;
-using ATEC_API.Data.DTO.StagingDTO;
-using ATEC_API.Data.IRepositories;
-using ATEC_API.Data.StoredProcedures;
-using ATEC_API.GeneralModels.MESATECModels.StagingResponse;
-using Dapper;
-using Microsoft.Data.SqlClient;
+// <copyright file="StagingRepository.cs" company="ATEC">
+// Copyright (c) ATEC. All rights reserved.
+// </copyright>
 
 namespace ATEC_API.Data.Repositories
 {
+    using System.Data;
+    using ATEC_API.Data.DTO.StagingDTO;
+    using ATEC_API.Data.IRepositories;
+    using ATEC_API.Data.Service;
+    using ATEC_API.Data.StoredProcedures;
+    using ATEC_API.GeneralModels;
+    using ATEC_API.GeneralModels.MESATECModels.StagingResponse;
+    using Dapper;
+    using Microsoft.Data.SqlClient;
+
     public class StagingRepository : IStagingRepository
     {
         private readonly IDapperConnection _dapperConnection;
+        private readonly DapperModelPagination _dapperModelPagination;
 
-        public StagingRepository(IDapperConnection dapperConnection)
+        public StagingRepository(IDapperConnection dapperConnection , DapperModelPagination dapperModelPagination)
         {
-            _dapperConnection = dapperConnection;
+            this._dapperConnection = dapperConnection;
+            this._dapperModelPagination = dapperModelPagination;
         }
 
         public async Task<IEnumerable<MaterialCustomerResponse>>? GetCustomerHistory(MaterialStagingHistoryDTO materialStaging)
@@ -135,6 +140,21 @@ namespace ATEC_API.Data.Repositories
             return LotExist;
         }
 
-        
+        public async Task<(IEnumerable<MagazineHistoryDTO>, PageResultsResponse pageResultsResponse)> DapperPagination(MagazineHistoryInput magazineHistoryInput)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@SearchData", magazineHistoryInput.searchValue, DbType.String);
+            parameters.Add("@@StageValue", magazineHistoryInput.stageValue, DbType.Int32);
+            parameters.Add("@PageSize", magazineHistoryInput.pageSize, DbType.Int32);
+            parameters.Add("@CurrentPage", magazineHistoryInput.currentPage, DbType.Int32);
+
+            var magazineDetailList = Enumerable.Empty<MagazineHistoryDTO>();
+            var pageResult = new PageResultsResponse();
+
+            (magazineDetailList, pageResult) = await _dapperModelPagination
+                                                             .GetDetailsAndPagingInfoAsync<MagazineHistoryDTO>(StagingSP.usp_Magazine_History_Search_API, parameters);
+
+            return (magazineDetailList, pageResult);
+        }
     }
 }

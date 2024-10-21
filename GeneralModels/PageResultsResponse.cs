@@ -12,6 +12,6 @@ namespace ATEC_API.GeneralModels
 
         public int PageSize { get; set; }
 
-        public int CurrentStart { get; set; }
+        public int CurrentPage { get; set; }
     }
 }
