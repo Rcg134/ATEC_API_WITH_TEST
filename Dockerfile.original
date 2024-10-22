@@ -1,0 +1,23 @@
+#Set Base Image
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+#Restore Dependencies Stage
+WORKDIR /src
+COPY ["ATEC_API.csproj","ATEC_API/"]
+RUN dotnet restore "ATEC_API/ATEC_API.csproj"
+
+
+#Build Stage
+COPY [".", "ATEC_API/"]
+RUN dotnet build "ATEC_API/ATEC_API.csproj" -c Release -o /app/build 
+
+
+#Publish Stage
+RUN dotnet publish "ATEC_API/ATEC_API.csproj" -c Release -o /app/publish 
+
+#Final Entry Point
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+COPY --from=build /app/publish .
+EXPOSE 7250
+EXPOSE 5058
+ENTRYPOINT ["dotnet","ATEC_API.dll"]

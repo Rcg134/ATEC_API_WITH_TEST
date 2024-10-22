@@ -19,7 +19,7 @@ namespace ATEC_API.Data.Repositories
             _hrisContext = hrisContext;
         }
 
-        public async Task<bool> IsOperatorQualified(HRISDTO hrisDTO)
+        public async Task<bool> IsOperatorQualified(HRISDTO hrisDTO ,CancellationToken cancellationToken)
         {
             var dateNow = DateTime.Now;
             var IsQualified = await _hrisContext
@@ -27,7 +27,7 @@ namespace ATEC_API.Data.Repositories
                                         AnyAsync(isQual => isQual.EmpNo == hrisDTO.EmpNo &&
                                                  isQual.CustomerId == hrisDTO.CustomerId &&
                                                  isQual.RecipeCode == hrisDTO.RecipeCode &&
-                                                 isQual.CertRequalDate >= dateNow);
+                                                 isQual.CertRequalDate >= dateNow, cancellationToken);
             return IsQualified;
         }
 
