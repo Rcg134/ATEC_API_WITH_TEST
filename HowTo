@@ -1,0 +1,75 @@
+// Sample HRISDTO object POST METHOD
+var hrisDto = {
+    empNo: "12345",
+    customerId: "67890",
+    recipeCode : "111"
+};
+
+// Make an AJAX POST request to the server
+$.ajax({
+    url: '/api/OperatorDetails/IsEmployeeQualified',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(hrisDto), // Pass the HRISDTO object here
+    success: function(response) {
+        // Response received successfully
+        console.log('Response:', response);
+    },
+    error: function(xhr, textStatus, errorThrown) {
+        // Error occurred during the request
+        console.error('Error:', textStatus, errorThrown);
+        
+        // Check if the status code is 400 (Bad Request)
+        if (xhr.status === 400) {
+            // Parse the error response and extract the error message
+            var errorResponse = xhr.responseJSON;
+            if (errorResponse && errorResponse.errors) {
+                var errorMessage = "";
+                for (var key in errorResponse.errors) {
+                    if (errorResponse.errors.hasOwnProperty(key)) {
+                        errorMessage += errorResponse.errors[key].join(", ") + "\n";
+                    }
+                }
+                // Show the error message to the user
+                alert("One or more validation errors occurred:\n" + errorMessage);
+            }
+        }
+    }
+});
+
+
+
+//GET METHOD
+$.ajax({
+  url: 'https://localhost:7250/api/Staging/IsTrackOut',
+  type: 'GET',
+  headers: {
+    'accept': '*/*',
+    'paramLotCode': 'DUMMYLOT.1-A',
+    'paramStageCode': '7'
+  },
+  success: function(response) {
+    // Handle success response here
+    console.log(response.details);
+  },
+    error: function(xhr, textStatus, errorThrown) {
+        // Error occurred during the request
+        console.error('Error:', textStatus, errorThrown);
+        
+        // Check if the status code is 400 (Bad Request)
+        if (xhr.status === 400) {
+            // Parse the error response and extract the error message
+            var errorResponse = xhr.responseJSON;
+            if (errorResponse && errorResponse.errors) {
+                var errorMessage = "";
+                for (var key in errorResponse.errors) {
+                    if (errorResponse.errors.hasOwnProperty(key)) {
+                        errorMessage += errorResponse.errors[key].join(", ") + "\n";
+                    }
+                }
+                // Show the error message to the user
+                alert("One or more validation errors occurred:\n" + errorMessage);
+            }
+        }
+    }
+});
