@@ -1,0 +1,31 @@
+2024-09-18 13:47:27.711 +08:00 [INF] User profile is available. Using 'C:\Users\russe\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-09-18 13:47:27.980 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - null null
+2024-09-18 13:47:28.010 +08:00 [WRN] Failed to determine the https port for redirect.
+2024-09-18 13:47:28.013 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2024-09-18 13:47:28.015 +08:00 [INF] AuthenticationScheme: Identity.Bearer was challenged.
+2024-09-18 13:47:28.019 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - 401 null null 39.8457ms
+2024-09-18 13:47:28.044 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - null null
+2024-09-18 13:47:28.049 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2024-09-18 13:47:28.049 +08:00 [INF] AuthenticationScheme: Identity.Bearer was challenged.
+2024-09-18 13:47:28.049 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - 401 null null 5.4418ms
+2024-09-18 13:49:26.707 +08:00 [INF] User profile is available. Using 'C:\Users\russe\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-09-18 13:49:26.836 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - null null
+2024-09-18 13:49:26.866 +08:00 [WRN] Failed to determine the https port for redirect.
+2024-09-18 13:49:26.869 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2024-09-18 13:49:26.871 +08:00 [INF] AuthenticationScheme: Identity.Bearer was challenged.
+2024-09-18 13:49:26.874 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - 401 null null 38.8043ms
+2024-09-18 13:49:26.893 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - null null
+2024-09-18 13:49:26.898 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2024-09-18 13:49:26.898 +08:00 [INF] AuthenticationScheme: Identity.Bearer was challenged.
+2024-09-18 13:49:26.898 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - 401 null null 5.6931ms
+2024-09-18 13:49:51.257 +08:00 [INF] User profile is available. Using 'C:\Users\russe\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-09-18 13:49:51.392 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - null null
+2024-09-18 13:49:51.422 +08:00 [WRN] Failed to determine the https port for redirect.
+2024-09-18 13:49:51.426 +08:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2024-09-18 13:49:51.427 +08:00 [INF] AuthenticationScheme: Identity.Bearer was challenged.
+2024-09-18 13:49:51.431 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/Staging/IsTrackOut - 401 null null 39.4933ms
