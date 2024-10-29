@@ -1,6 +1,0 @@
-@ATEC_API_HostAddress = http://localhost:400
-
-GET {{ATEC_API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
