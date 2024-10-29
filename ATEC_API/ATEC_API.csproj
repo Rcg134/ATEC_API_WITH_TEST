@@ -1,4 +1,3 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,6 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+
+    <Compile Remove="DomainModels\CantierDomainModel\**" />
+    <Content Remove="DomainModels\CantierDomainModel\**" />
+    <EmbeddedResource Remove="DomainModels\CantierDomainModel\**" />
+    <None Remove="DomainModels\CantierDomainModel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.4.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
@@ -23,15 +37,28 @@
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DomainModels\CantierDomainModel\" />
+
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
   <!-- add this to remove error duplicate assembly -->
   <PropertyGroup>
       <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
       <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>    
+
+      <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+      <UserSecretsId>b95292b7-8da5-4624-b1df-f6bfc0a7eb82</UserSecretsId>
+      <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+      <DockerfileContext>.</DockerfileContext>    
   </PropertyGroup>
 </Project>

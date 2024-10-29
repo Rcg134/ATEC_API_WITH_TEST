@@ -10,5 +10,8 @@ namespace ATEC_API.Data.IRepositories
     public interface IHRISRepository
     {
         Task<bool> IsOperatorQualified(HRISDTO hRISDTO);
+
+        Task<bool> IsOperatorQualified(HRISDTO hRISDTO,CancellationToken cancellationToken);
+
     }
 }
