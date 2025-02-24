@@ -19,12 +19,13 @@ builder.Services.AddScoped<IStagingRepository, StagingRepository>();
 builder.Services.AddScoped<ICantierRepository, CantierRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IDownloadRepository, DownloadRepository>();
+builder.Services.AddScoped<IElogRepository, ElogRepository>();
 builder.Services.AddScoped<ILogSheetRepository, LogSheetRepository>();
 builder.Services.AddScoped<DapperModelPagination>();
 builder.Services.AddScoped<DownloadService>();
 builder.Services.AddSingleton<CacheManagerService>();
 
-builder.Services.ConfigureCorsDev();
+builder.Services.ConfigureCorsProd();
 builder.Services.ConfigureLogger(builder.Configuration);
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(Log.Logger);

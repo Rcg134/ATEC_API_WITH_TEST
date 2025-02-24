@@ -25,7 +25,8 @@ namespace ATEC_API.ExtentionServices
                                         "http://prod.atecmes.com:400",
                                         "http://192.168.1.65:500",
                                         "http://192.168.1.65:80",
-                                        "http://192.168.1.65")
+                                        "http://192.168.1.65",
+                                        "http://192.168.1.65:5001")
                                           .AllowAnyHeader()
                                           .AllowAnyMethod()
                                           .AllowCredentials();
